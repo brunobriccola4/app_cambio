@@ -11,6 +11,7 @@ import {
   TextField,
 } from "@mui/material";
 import Modal from "./components/Modal";
+import useViewport from "./utils/useViewPort";
 
 const url = "https://api.vatcomply.com/rates?base=";
 
@@ -20,7 +21,8 @@ function App() {
   const [to, setTo] = useState("EUR");
   const [data, setData] = useState();
   const [updated, setUpdated] = useState("");
-
+  const { width } = useViewport();
+  const breakpoint = 390;
   const getData = async () => {
     const res = await fetch(`${url}${from}`).then((res) => res.json());
     const data = res.rates;
@@ -68,7 +70,7 @@ function App() {
       </div>
       <div className="paperContainer">
         <Modal>
-          <Stack direction="row" className="stack">
+          <Stack className="stack">
             <div className="inputContainer">
               <label className="aLabel">Amount</label>
               <TextField
@@ -82,6 +84,7 @@ function App() {
                   ),
                   inputProps: { inputMode: "numeric", pattern: "[0-9]*" },
                 }}
+                size={"small"}
               />
             </div>
             <div className="inputContainer">
@@ -93,6 +96,7 @@ function App() {
                   value={from}
                   onChange={handleChangeFrom}
                   variant="outlined"
+                  size="small"
                 >
                   {Object.keys(data ?? {}).map((x) => (
                     <MenuItem value={x}>{x}</MenuItem>
@@ -114,6 +118,7 @@ function App() {
                   value={to}
                   onChange={handleChangeTo}
                   variant="outlined"
+                  size="small"
                 >
                   {Object.keys(data ?? {}).map((x) => (
                     <MenuItem value={x}>{x}</MenuItem>
@@ -123,27 +128,40 @@ function App() {
             </div>
           </Stack>
           {data && (
-            <Stack className="info">
-              {amount} {from} = {to} {amount * data[to]}
-            </Stack>
+            <>
+              <Stack className="info">
+                {amount} {from} = {to} {amount * data[to]}
+              </Stack>
+              <Stack className="amountReference">
+                <p>1 {from} = {1 * data[to]}</p>
+              </Stack>
+            </>
           )}
-          <Stack className="containerInfo">
-            <p className="textInfo">
-              We use the mid-market rate for our Converter. This is for
-              informational purposes only. You won’t receive this rate when
-              sending money.
-            </p>
-          </Stack>
-          <Stack className="footer">
-            <p>
-              <a href="https://www.xe.com/currency/eur-euro/" target="_blank">
-                Euro
-              </a> {" "}
-              to
-              {" "}<a href="https://www.xe.com/currency/usd-us-dollar/">US Dollar</a>{" "}
-              conversion — Last updated {updated}
-            </p>
-          </Stack>
+          {width > breakpoint && 
+            <div className="wrapper">
+              <Stack className="containerInfo">
+                <p className="textInfo">
+                  We use the mid-market rate for our Converter. This is for
+                  informational purposes only. You won’t receive this rate when
+                  sending money.
+                </p>
+              </Stack>
+            </div>
+          }
+          <div className="wrapper">
+            <Stack className="footer">
+              <p>
+                <a href="https://www.xe.com/currency/eur-euro/" target="_blank">
+                  Euro
+                </a>{" "}
+                to{" "}
+                <a href="https://www.xe.com/currency/usd-us-dollar/">
+                  US Dollar
+                </a>{" "}
+                conversion — Last updated {updated}
+              </p>
+            </Stack>
+          </div>
         </Modal>
       </div>
     </div>
