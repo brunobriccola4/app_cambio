@@ -23,6 +23,7 @@ function App() {
   const [updated, setUpdated] = useState("");
   const { width } = useViewport();
   const breakpoint = 390;
+
   const getData = async () => {
     const res = await fetch(`${url}${from}`).then((res) => res.json());
     const data = res.rates;
@@ -130,10 +131,10 @@ function App() {
           {data && (
             <>
               <Stack className="info">
-                {amount} {from} = {to} {amount * data[to]}
+                {amount} {from} = {to} {(amount * data[to]).toFixed(2)}
               </Stack>
               <Stack className="amountReference">
-                <p>1 {from} = {1 * data[to]}</p>
+                <p>1 {from} = {(1 * data[to]).toFixed(2)}</p>
               </Stack>
             </>
           )}

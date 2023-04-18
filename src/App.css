@@ -130,6 +130,7 @@
 
   color: #000000;
 }
+
 .footer {
   position: absolute;
   width: 393px;
@@ -174,7 +175,7 @@ a {
     gap: 5px;
   }
 
-  .text{
-    top: 100px
+  .text {
+    top: 80px
   }
 }
