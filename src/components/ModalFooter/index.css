@@ -1,0 +1,16 @@
+.footer {
+  position: absolute;
+  width: 393px;
+  left: 700px;
+  top: 350px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 36px;
+  color: #000000;
+}
+
+a {
+  color: #000000;
+}

@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import Modal from "./components/Modal";
 import useViewport from "./utils/useViewPort";
+import Header from "./components/Header";
+import ModalFooter from "./components/ModalFooter";
 
 const url = "https://api.vatcomply.com/rates?base=";
 
@@ -61,9 +63,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p className="title">Currency exchange</p>
-      </header>
+      <Header title={"Currency exchange"}/>
       <div className="container">
         <p className="text">
           {amount} {from} to {to} - Convert Euros to US Dollars
@@ -150,18 +150,7 @@ function App() {
             </div>
           }
           <div className="wrapper">
-            <Stack className="footer">
-              <p>
-                <a href="https://www.xe.com/currency/eur-euro/" target="_blank">
-                  Euro
-                </a>{" "}
-                to{" "}
-                <a href="https://www.xe.com/currency/usd-us-dollar/">
-                  US Dollar
-                </a>{" "}
-                conversion — Last updated {updated}
-              </p>
-            </Stack>
+            <ModalFooter updated={updated}/>
           </div>
         </Modal>
       </div>
