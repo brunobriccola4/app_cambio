@@ -14,6 +14,8 @@ import Modal from "./components/Modal";
 import useViewport from "./utils/useViewPort";
 import Header from "./components/Header";
 import ModalFooter from "./components/ModalFooter";
+import InfoModal from "./components/Info";
+import Flyer from "./components/Flyer";
 
 const url = "https://api.vatcomply.com/rates?base=";
 
@@ -63,7 +65,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header title={"Currency exchange"}/>
+      <Header title={"Currency exchange"} />
       <div className="container">
         <p className="text">
           {amount} {from} to {to} - Convert Euros to US Dollars
@@ -129,28 +131,13 @@ function App() {
             </div>
           </Stack>
           {data && (
-            <>
-              <Stack className="info">
-                {amount} {from} = {to} {(amount * data[to]).toFixed(2)}
-              </Stack>
-              <Stack className="amountReference">
-                <p>1 {from} = {(1 * data[to]).toFixed(2)}</p>
-              </Stack>
-            </>
+            <InfoModal amount={amount} data={data} from={from} to={to} />
           )}
-          {width > breakpoint && 
-            <div className="wrapper">
-              <Stack className="containerInfo">
-                <p className="textInfo">
-                  We use the mid-market rate for our Converter. This is for
-                  informational purposes only. You won’t receive this rate when
-                  sending money.
-                </p>
-              </Stack>
-            </div>
-          }
+          {width > breakpoint && (
+            <Flyer />
+          )}
           <div className="wrapper">
-            <ModalFooter updated={updated}/>
+            <ModalFooter updated={updated} />
           </div>
         </Modal>
       </div>
