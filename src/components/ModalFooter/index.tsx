@@ -1,5 +1,6 @@
 import { Stack } from "@mui/material";
 import React, { FC } from "react";
+import './index.css'
 
 interface IFooter {
   updated: string;

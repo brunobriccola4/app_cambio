@@ -14,3 +14,17 @@
 a {
   color: #000000;
 }
+
+@media (width <= 390px) {
+  .footer {
+    position: initial;
+    justify-content: center;
+    line-height: 25px;
+    flex-wrap: wrap;
+    padding: 0px 20px;
+    color: #000000;
+  }
+  a {
+    color: #000000;
+  }
+}
