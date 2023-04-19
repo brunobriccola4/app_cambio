@@ -1,0 +1,30 @@
+.container {
+  background: #1a8dff;
+  height: 295px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.text {
+  margin: 0px;
+  text-align: center;
+  color: #ffffff;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 32px;
+
+  position: absolute;
+  top: 123px;
+}
+
+@media (width <= 390px) {
+  .text {
+    top: 80px;
+  }
+  p {
+    margin: 0px;
+  }
+}

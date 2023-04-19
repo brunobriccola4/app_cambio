@@ -16,6 +16,7 @@ import Header from "./components/Header";
 import ModalFooter from "./components/ModalFooter";
 import InfoModal from "./components/Info";
 import Flyer from "./components/Flyer";
+import Title from "./components/Title";
 
 const url = "https://api.vatcomply.com/rates?base=";
 
@@ -66,11 +67,7 @@ function App() {
   return (
     <div className="App">
       <Header title={"Currency exchange"} />
-      <div className="container">
-        <p className="text">
-          {amount} {from} to {to} - Convert Euros to US Dollars
-        </p>
-      </div>
+      <Title from={from} to={to} amount={amount} />
       <div className="paperContainer">
         <Modal>
           <Stack className="stack">
@@ -133,9 +130,7 @@ function App() {
           {data && (
             <InfoModal amount={amount} data={data} from={from} to={to} />
           )}
-          {width > breakpoint && (
-            <Flyer />
-          )}
+          {width > breakpoint && <Flyer />}
           <div className="wrapper">
             <ModalFooter updated={updated} />
           </div>
