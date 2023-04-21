@@ -12,14 +12,14 @@ interface IModalInfo {
 const InfoModal: React.FC<IModalInfo> = ({ amount, from, to, data }) => {
   return (
     <div>
-      <Stack className="info">
+      <div className="info">
         {amount} {from} = {to} {(amount * data[to]).toFixed(2)}
-      </Stack>
-      <Stack className="amountReference">
+      </div>
+      <div className="amountReference">
         <p>
           1 {from} = {(1 * data[to]).toFixed(2)}
         </p>
-      </Stack>
+      </div>
     </div>
   );
 };

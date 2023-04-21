@@ -1,15 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import "./App.css";
 import { ReactComponent as Vector } from "./assets/icons/Vector.svg";
-import {
-  FormControl,
-  InputAdornment,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  Stack,
-  TextField,
-} from "@mui/material";
 import Modal from "./components/Modal";
 import useViewport from "./utils/useViewPort";
 import Header from "./components/Header";
@@ -27,7 +18,7 @@ function App() {
   const [data, setData] = useState();
   const [updated, setUpdated] = useState("");
   const { width } = useViewport();
-  const breakpoint = 390;
+  const breakpoint = 690;
 
   const getData = async () => {
     const res = await fetch(`${url}${from}`).then((res) => res.json());
@@ -46,11 +37,11 @@ function App() {
     getData();
   }, [from]);
 
-  const handleChangeFrom = (e: SelectChangeEvent<string>): void => {
+  const handleChangeFrom = (e: ChangeEvent<HTMLSelectElement>): void => {
     setFrom(e.target.value);
   };
 
-  const handleChangeTo = (e: SelectChangeEvent<string>): void => {
+  const handleChangeTo = (e: ChangeEvent<HTMLSelectElement>): void => {
     setTo(e.target.value);
   };
 
@@ -70,39 +61,22 @@ function App() {
       <Title from={from} to={to} amount={amount} />
       <div className="paperContainer">
         <Modal>
-          <Stack className="stack">
+          <div className="stack">
             <div className="inputContainer">
               <label className="aLabel">Amount</label>
-              <TextField
-                onChange={handleChangeAmount}
-                id="outlined-basic"
-                variant="outlined"
+              <input
                 value={amount}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
-                  ),
-                  inputProps: { inputMode: "numeric", pattern: "[0-9]*" },
-                }}
-                size={"small"}
+                onChange={handleChangeAmount}
+                className="aInput"
               />
             </div>
             <div className="inputContainer">
-              <FormControl className="inputContainer">
-                <label className="aLabel">From</label>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={from}
-                  onChange={handleChangeFrom}
-                  variant="outlined"
-                  size="small"
-                >
-                  {Object.keys(data ?? {}).map((x) => (
-                    <MenuItem value={x}>{x}</MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <label className="aLabel">From</label>
+              <select onChange={handleChangeFrom} value={from} className="aInput">
+                {Object.keys(data ?? {}).map((selected) => (
+                  <option value={selected}>{selected}</option>
+                ))}
+              </select>
             </div>
             <div className="iconContainer">
               <div className="iconEllipse" onClick={handleClick}>
@@ -110,23 +84,14 @@ function App() {
               </div>
             </div>
             <div className="inputContainer">
-              <FormControl className="inputContainer">
-                <label className="aLabel">To</label>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={to}
-                  onChange={handleChangeTo}
-                  variant="outlined"
-                  size="small"
-                >
-                  {Object.keys(data ?? {}).map((x) => (
-                    <MenuItem value={x}>{x}</MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <label className="aLabel">To</label>
+              <select onChange={handleChangeTo} value={to} className="aInput">
+                {Object.keys(data ?? {}).map((x) => (
+                  <option value={x}>{x}</option>
+                ))}
+              </select>
             </div>
-          </Stack>
+          </div>
           {data && (
             <InfoModal amount={amount} data={data} from={from} to={to} />
           )}

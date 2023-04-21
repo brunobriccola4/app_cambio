@@ -8,14 +8,15 @@
   width: 100%;
 }
 .stack {
-  flex-direction: row !important;
-  padding: 33px 0px 0px 42px;
+  display: flex;
+  flex-direction: row;
+  padding: 30px;
   gap: 54px;
 }
 .inputContainer {
   display: flex;
   flex-direction: column;
-  width: 280px;
+  width: 100%;
   gap: 16px;
 }
 .iconContainer {
@@ -57,6 +58,15 @@
   justify-content: end;
 }
 
+@media (width <= 500px) {
+  .stack {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 14px;
+  }
+}
+
 @media (width <= 390px) {
   .App {
     height: 100vh;
@@ -70,5 +80,4 @@
   .inputContainer {
     gap: 5px;
   }
-
 }
